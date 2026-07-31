@@ -27,9 +27,32 @@ python -m http.server 5173
 
 Después abrir http://localhost:5173
 
+## Build
+
+Para generar la carpeta publicable:
+
+```bash
+powershell -ExecutionPolicy Bypass -File build.ps1
+```
+
+Deja en `dist/` el `index.html`, `assets/`, `robots.txt` y el `.htaccess` de `deploy/`
+(compresión, caché y redirección a HTTPS). `dist/` no se versiona.
+
 ## Desplegar
 
-El sitio es la raíz del repo, sin comando de build.
+### Hostinger
+
+1. Ejecutar el build.
+2. hPanel → **Administrador de archivos** → entrar a `public_html`.
+3. Borrar lo que haya adentro (por defecto trae un `default.php`).
+4. Subir el **contenido** de `dist/` (no la carpeta `dist` en sí). Si se sube un `.zip`,
+   descomprimirlo ahí mismo y verificar que `index.html` quede en la raíz de `public_html`.
+5. Comprobar que el `.htaccess` se subió: en el administrador de archivos hay que activar
+   "mostrar archivos ocultos" para verlo.
+
+### Otros
+
+El sitio también es la raíz del repo, sin comando de build.
 
 - **Vercel**: importar el repo → Framework preset `Other`, Build command vacío, Output directory `.`
 - **Netlify**: importar el repo → Build command vacío, Publish directory `.`
