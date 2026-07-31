@@ -40,13 +40,7 @@ El sitio es la raíz del repo, sin comando de build.
 
 1. **Dominio**: reemplazar `https://TU-DOMINIO.com` en `index.html` (canonical, Open Graph
    y JSON-LD) por el dominio real. Son 6 apariciones.
-2. **Redes sociales**: en la sección *Presencia Digital*, los enlaces de Instagram, Facebook
-   y Spotify apuntan a `#digital` (marcador de posición del diseño original). Falta poner
-   las URLs reales. Lo mismo con "Ver videos oficiales" (canal de YouTube).
-3. **Contacto**: el botón "Contactar al equipo" apunta a `#contacto`. Conviene cambiarlo por
-   un `mailto:` real o un formulario.
-4. **Press Kit**: "Descargar Press Kit" todavía no enlaza a ningún archivo.
-5. **Galería**: el diseño original tenía una sección de galería desactivada por defecto, con
+2. **Galería**: el diseño original tenía una sección de galería desactivada por defecto, con
    dos espacios vacíos a la espera de fotos oficiales. No se incluyó en esta versión; se puede
    sumar cuando estén las fotografías.
 
