@@ -63,6 +63,36 @@ img { max-width: 100%; }
 
 .btn--sm { font-size: 10px; padding: 13px 22px; }
 
+/* ---- Texto desplegable ("leer más") ---- */
+
+.mas {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  width: 100%;
+}
+
+.mas__cuerpo {
+  order: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+}
+
+.mas > summary {
+  order: 2;
+  list-style: none;
+  cursor: pointer;
+  align-self: center;
+}
+.mas > summary::-webkit-details-marker { display: none; }
+
+.mas__cerrar { display: none; }
+.mas[open] .mas__abrir { display: none; }
+.mas[open] .mas__cerrar { display: inline; }
+
 /* ---- Tarjeta de video ---- */
 
 .video-card {
