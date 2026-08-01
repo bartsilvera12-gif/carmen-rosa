@@ -93,6 +93,50 @@ img { max-width: 100%; }
 .mas[open] .mas__abrir { display: none; }
 .mas[open] .mas__cerrar { display: inline; }
 
+/* ---- Iconos de plataformas de música ---- */
+
+.plataformas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(18px, 6vw, 34px);
+}
+
+.plataformas a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 78px;
+  color: var(--oro-claro);
+}
+
+.plataformas span {
+  font-family: var(--sans);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(244, 238, 225, 0.55);
+  transition: color 0.4s;
+}
+
+.plataformas svg {
+  width: 26px;
+  height: 26px;
+  fill: currentColor;
+  padding: 13px;
+  border: 1px solid rgba(203, 177, 122, 0.4);
+  border-radius: 50%;
+  transition: background 0.4s, border-color 0.4s;
+  box-sizing: content-box;
+}
+
+.plataformas a:hover svg {
+  background: rgba(203, 177, 122, 0.14);
+  border-color: rgba(227, 207, 160, 0.8);
+}
+.plataformas a:hover span { color: var(--oro-claro); }
+
 /* ---- Tarjeta de video ---- */
 
 .video-card {
