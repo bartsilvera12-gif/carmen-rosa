@@ -3,7 +3,9 @@
   AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/javascript image/svg+xml
 </IfModule>
 
-# Caché del navegador
+# Caché del navegador.
+# CSS, JS e imágenes llevan ?v=<hash> puesto por build.ps1, así que se pueden
+# cachear un año: cuando cambia el archivo, cambia la URL.
 <IfModule mod_expires.c>
   ExpiresActive On
   ExpiresByType text/css               "access plus 1 year"
@@ -11,7 +13,13 @@
   ExpiresByType image/jpeg             "access plus 1 year"
   ExpiresByType image/png              "access plus 1 year"
   ExpiresByType image/webp             "access plus 1 year"
-  ExpiresByType text/html              "access plus 1 hour"
+</IfModule>
+
+# El HTML nunca se cachea: es lo que apunta a las versiones nuevas del resto.
+<IfModule mod_headers.c>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache, must-revalidate, max-age=0"
+  </FilesMatch>
 </IfModule>
 
 # Codificación

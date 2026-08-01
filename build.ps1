@@ -28,8 +28,9 @@ Copy-Item (Join-Path $raiz 'deploy\.htaccess') $dist
 # servidor siguen entregando la version vieja despues de cada despliegue.
 $indice = Join-Path $dist 'index.html'
 $html = [System.IO.File]::ReadAllText($indice, [System.Text.Encoding]::UTF8)
-foreach ($archivo in @('styles.css', 'video.js')) {
-  $ruta = Join-Path $dist "assets\$archivo"
+$versionables = @('styles.css', 'video.js') + (Get-ChildItem (Join-Path $dist 'assets\img') -File | ForEach-Object { "img/$($_.Name)" })
+foreach ($archivo in $versionables) {
+  $ruta = Join-Path $dist "assets\$($archivo.Replace('/', '\'))"
   $hash = (Get-FileHash $ruta -Algorithm MD5).Hash.Substring(0, 8).ToLower()
   $html = $html.Replace("assets/$archivo", "assets/$archivo`?v=$hash")
   Write-Output "  $archivo -> ?v=$hash"
