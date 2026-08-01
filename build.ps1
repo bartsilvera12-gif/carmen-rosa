@@ -23,7 +23,20 @@ Copy-Item (Join-Path $raiz 'robots.txt') $dist
 Copy-Item (Join-Path $raiz 'assets') $dist -Recurse
 Copy-Item (Join-Path $raiz 'deploy\.htaccess') $dist
 
-# 3. Resumen
+# 3. Versionar CSS y JS (cache busting).
+# El .htaccess cachea estos archivos un anio: sin el ?v= el navegador y el
+# servidor siguen entregando la version vieja despues de cada despliegue.
+$indice = Join-Path $dist 'index.html'
+$html = [System.IO.File]::ReadAllText($indice, [System.Text.Encoding]::UTF8)
+foreach ($archivo in @('styles.css', 'video.js')) {
+  $ruta = Join-Path $dist "assets\$archivo"
+  $hash = (Get-FileHash $ruta -Algorithm MD5).Hash.Substring(0, 8).ToLower()
+  $html = $html.Replace("assets/$archivo", "assets/$archivo`?v=$hash")
+  Write-Output "  $archivo -> ?v=$hash"
+}
+[System.IO.File]::WriteAllText($indice, $html, (New-Object System.Text.UTF8Encoding($false)))
+
+# 4. Resumen
 $archivos = Get-ChildItem $dist -Recurse -File -Force
 $peso = [math]::Round(($archivos | Measure-Object -Property Length -Sum).Sum / 1MB, 2)
 Write-Output "Build listo en dist/ - $($archivos.Count) archivos, $peso MB"
